@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Entity;
 
 class Task
@@ -21,44 +22,59 @@ class Task
         $this->task = $task;
     }
     
-    public function getDate_from()
+    //name
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name  = $name;
+    }
+    
+    //date_from
+    public function getDateFrom()
     {
         return $this->date_from;
     }
 
-    public function setDate_from(\DateTime $dueDate = null)
+    public function setDateFrom(\DateTime $date_from = null)
     {
-        $this->dueDate = $date_from;
+        $this->date_from = $date_from;
     }
     
-    public function getDate_to()
+    //date_to
+    public function getDateTo()
     {
         return $this->date_to;
     }
 
-    public function setDate_to(\DateTime $dueDate = null)
+    public function setDateTo(\DateTime $date_to = null)
     {
-        $this->dueDate = $date_to;
+        $this->date_to= $date_to;
     }
     
-    
-    public function getRoom_type()
+    //room_type
+    public function getRoomType()
     {
         return $this->room_type;
     }
 
-    public function setRoom_type($task)
+    public function setRoomType($room_type)
     {
-        $this->task = $room_type;
+        $this->room_type= $room_type;
     }
-    public function getRoom_nr()
+    
+    //room_nr
+    public function getRoomNr()
     {
         return $this->room_nr;
     }
 
-    public function setRoom_nr($task)
+    public function setRoomNr($room_nr)
     {
-        $this->task = $room_nr;
+        $this->room_nr = $room_nr;
     }
     
 }   
