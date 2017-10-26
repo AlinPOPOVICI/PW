@@ -41,7 +41,7 @@ class DefaultController extends Controller{
             ->add('save', SubmitType::class, array('label' => 'Book_it'))
             ->getForm();
 
-        return $this->render('default/new.html.php', array(
+        return $this->render('default/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }

@@ -1,4 +1,4 @@
- 
-<?php echo $view['form']->start($form) ?>
-<?php echo $view['form']->widget($form) ?>
-<?php echo $view['form']->end($form) ?>
+<?php
+echo $view['form']->start($form) 
+echo $view['form']->widget($form) 
+echo $view['form']->end($form) 
