@@ -5,22 +5,12 @@ namespace AppBundle\Entity;
 class Task
 { 
     //telefon, adresa, mail
-    protected $task;
     protected $name;
     protected $date_from;
     protected $date_to;
     protected $room_type;
     protected $room_nr;
 
-    public function getTask()
-    {
-        return $this->task;
-    }
-
-    public function setTask($task)
-    {
-        $this->task = $task;
-    }
     
     //name
     public function getName()
