@@ -5,7 +5,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="booking")
+ * @ORM\Table(name="articol")
  */
  
 class Booking{
@@ -22,20 +22,12 @@ class Booking{
     private $name;
     
     /**
-     * @ORM\Column(type="DateType")
-     */
-    private $date_in;
-    /**
-     * @ORM\Column(type="DateType")
-     */
-    private $date_to;
-    /**
      * @ORM\Column(type="integer")
      */
-    private $roomtype;
+    private $suma;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="text")
      */
-    private $rooms;
+    private $text;
 
 }
