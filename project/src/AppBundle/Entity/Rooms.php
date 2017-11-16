@@ -1,6 +1,6 @@
 <?php
 namespace AppBundle\Entity;
-
+# toate camerele fiecar ecu nr ei cu care o recunastem
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,6 +23,11 @@ class Rooms{
      * @ORM\Column(type="integer")
      */
     private $roomsnr;
+    
+     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $ocupat;
     
     
     public function getName()
@@ -58,6 +63,16 @@ class Rooms{
     public function setRoomsnr($roomsnr)
     {
         $this->roomsnr  = $roomsnr;
+    }
+    
+     public function getOcupat()
+    {
+        return $this->ocupat;
+    }
+
+    public function setOcupat($ocupat)
+    {
+        $this->ocupat  = $ocupat;
     }
 
 }

@@ -46,23 +46,23 @@ class Task
     }
     
     //room_type
-    public function getRoomType()
+    public function getRoomtype()
     {
         return $this->room_type;
     }
 
-    public function setRoomType($room_type)
+    public function setRoomtype($room_type)
     {
         $this->room_type= $room_type;
     }
     
     //room_nr
-    public function getRoomNr()
+    public function getRoomnr()
     {
         return $this->room_nr;
     }
 
-    public function setRoomNr($room_nr)
+    public function setRoomnr($room_nr)
     {
         $this->room_nr = $room_nr;
     }

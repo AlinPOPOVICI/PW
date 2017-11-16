@@ -18,6 +18,24 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class DefaultController extends Controller{
 
+    
+    public function createAction($task)
+{
+
+    $booking = new Booking();
+    $booking->setName($task->name);
+   
+   
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($booking);
+    $em->flush();
+
+    return new Response('Saved new booking for '.$booking->getName());
+}
+
+
+
     /**
      * @Route("/form")
      */
@@ -47,32 +65,23 @@ class DefaultController extends Controller{
             
             if ($form->isSubmitted() && $form->isValid()) {
                 $task = $form->getData();
+               
+                $booking = new Booking();
+                $booking->setName($task->getName());
+                $booking->setRoomtype($task->getRoomtype());
+                $booking->setRoomnr($task->getRoomnr());
+                $booking->setSuma($task->getRoomnr()*$task->getRoomnr()*30);
+   
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($booking);
+                $em->flush();
             }
         return $this->render('default/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }
     
-    
-    public function createAction(Task $task)
-{
-    // you can fetch the EntityManager via $this->getDoctrine()
-    // or you can add an argument to your action: createAction(EntityManagerInterface $em)
-    $em = $this->getDoctrine()->getManager();
-
-    $booking = new Booking();
-    $booking->setName($task->name);
-   // $booking->set(19.99);
-   // $booking->setDescription('Ergonomic and stylish!');
-
-    // tells Doctrine you want to (eventually) save the Product (no queries yet)
-    $em->persist($booking);
-
-    // actually executes the queries (i.e. the INSERT query)
-    $em->flush();
-
-    return new Response('Saved new product with id '.$booking->getId());
-}
 
 // if you have multiple entity managers, use the registry to fetch them
 public function editAction()

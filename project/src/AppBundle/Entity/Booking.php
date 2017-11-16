@@ -45,12 +45,13 @@ class Booking{
         $this->name  = $name;
     }
     
+    
        public function getRoomtype()
     {
         return $this->roomtype;
     }
 
-    public function setRoomtypee($roomtype)
+    public function setRoomtype($roomtype)
     {
         $this->roomtype  = $roomtype;
     }
@@ -63,7 +64,7 @@ class Booking{
         return $this->roomsnr;
     }
 
-    public function setRoomsnr($roomsnr)
+    public function setRoomnr($roomsnr)
     {
         $this->roomsnr  = $roomsnr;
     }
