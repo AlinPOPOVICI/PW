@@ -16,11 +16,6 @@ class Rooms{
      */
     private $id;
     /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $name;
-    
-    /**
      * @ORM\Column(type="integer")
      */
     private $roomtype;
@@ -28,5 +23,41 @@ class Rooms{
      * @ORM\Column(type="integer")
      */
     private $roomsnr;
+    
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name  = $name;
+    }
+    
+    
+    
+    public function getRoomtype()
+    {
+        return $this->roomtype;
+    }
+
+    public function setRoomtypee($roomtype)
+    {
+        $this->roomtype  = $roomtype;
+    }
+    
+    
+    
+    
+    public function getRoomsnr()
+    {
+        return $this->roomsnr;
+    }
+
+    public function setRoomsnr($roomsnr)
+    {
+        $this->roomsnr  = $roomsnr;
+    }
 
 }

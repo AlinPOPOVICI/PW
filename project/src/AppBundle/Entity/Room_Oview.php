@@ -5,34 +5,31 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="booking")
+ * @ORM\Table(name="rooms_oview")
  */
  
-class Booking{
-    /**
+class Rooms_Oview{
+/**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
     /**
-     * @ORM\Column(type="string", length=100)
-
-     */
-    private $name;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $suma;
-   /**
      * @ORM\Column(type="integer")
      */
     private $roomtype;
     /**
      * @ORM\Column(type="integer")
      */
-    private $roomsnr;
+    private $nr;   #total camere de un tip
+     /**
+     * @ORM\Column(type="integer")
+     */
+    private $roomsnr;  # camere ocupate de tipul respectiv 
+    
+    
+    
     
     
     public function getName()
@@ -45,7 +42,9 @@ class Booking{
         $this->name  = $name;
     }
     
-       public function getRoomtype()
+    
+    
+    public function getRoomtype()
     {
         return $this->roomtype;
     }
@@ -58,7 +57,17 @@ class Booking{
     
     
     
-    public function getRoomsnr()
+    public function getNr()
+    {
+        return $this->nr;
+    }
+
+    public function setNr($nr)
+    {
+        $this->nr  = $nr;
+    }
+    
+     public function getRoomsnr()
     {
         return $this->roomsnr;
     }
@@ -67,20 +76,5 @@ class Booking{
     {
         $this->roomsnr  = $roomsnr;
     }
-    
-    
-    
-    public function getSuma()
-    {
-        return $this->suma;
-    }
-
-    public function setSuma($suma)
-    {
-        $this->suma  = $suma;
-    }
-    
-    
-    
 
 }
