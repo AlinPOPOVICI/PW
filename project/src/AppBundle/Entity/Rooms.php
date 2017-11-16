@@ -1,4 +1,4 @@
- <?php
+<?php
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="rooms")
  */
  
-class Booking{
+class Rooms{
 /**
      * @ORM\Column(type="integer")
      * @ORM\Id
