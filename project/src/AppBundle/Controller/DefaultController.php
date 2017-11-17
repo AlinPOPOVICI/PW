@@ -34,13 +34,33 @@ class DefaultController extends Controller{
     return new Response('Saved new booking for '.$booking->getName());
 }
 
-
-
+  /**
+     * @Route("/home")
+     */
+     
+    public function homeAction(Request $request)
+    {
+       
+        return $this->render('default/new2.html.twig', array());
+         
+   
+    }
+/**
+     * @Route("/contact")
+     */
+     
+    public function contactAction(Request $request)
+    {
+       
+        return $this->render('default/new.html2.twig', array());
+         
+   
+    }
     /**
      * @Route("/form")
      */
      
-    public function newAction(Request $request)
+    public function formAction(Request $request)
     {
         // create a task and give it some dummy data for this example
         $task = new Task();
@@ -84,6 +104,15 @@ class DefaultController extends Controller{
     
 
 // if you have multiple entity managers, use the registry to fetch them
+public function verify(Booking $booking){
+
+
+
+
+}
+
+
+
 public function editAction()
 {
     $doctrine = $this->getDoctrine();
