@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Task;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -134,6 +134,15 @@ public function showAction($bookingId)
 
     // ... do something, like pass the $product object into a template
 }
-    
+
+public function registerAction(UserPasswordEncoderInterface $encoder)
+{
+    // whatever *your* User object is
+    $user = new AppBundle\Entity\User();
+    $plainPassword = 'ryanpass';
+    $encoded = $encoder->encodePassword($user, $plainPassword);
+
+    $user->setPassword($encoded);
+}  
     
 }

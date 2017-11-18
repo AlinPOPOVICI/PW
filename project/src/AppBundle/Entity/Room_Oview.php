@@ -29,7 +29,10 @@ class Rooms_Oview{
     private $roomsnr;  # camere ocupate de tipul respectiv 
     
     
-    
+         public function getID()
+    {
+        return $this->id;
+    }
     
     
     public function getName()

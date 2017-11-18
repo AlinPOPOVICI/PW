@@ -30,15 +30,12 @@ class Rooms{
     private $ocupat;
     
     
-    public function getName()
+     public function getID()
     {
-        return $this->name;
+        return $this->id;
     }
-
-    public function setName($name)
-    {
-        $this->name  = $name;
-    }
+    
+    
     
     
     
@@ -47,7 +44,7 @@ class Rooms{
         return $this->roomtype;
     }
 
-    public function setRoomtypee($roomtype)
+    public function setRoomtype($roomtype)
     {
         $this->roomtype  = $roomtype;
     }

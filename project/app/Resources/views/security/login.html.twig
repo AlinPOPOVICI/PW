@@ -1,0 +1,56 @@
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+
+
+
+<link rel="stylesheet" href="{{ asset('bundles/mystyle.css') }}" />
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+<body style="background-color:rgb(0, 255, 255);">
+
+<div class="top" background="lugoj.jpg">
+    <header> 
+        <nav>
+            <ul>
+                <li style="font-size:200%"> <a href="home">Home</a>&nbsp&nbsp&nbsp<a href="form">Bookings&nbsp&nbsp&nbsp</a><a href="contact">Contact &nbsp&nbsp&nbsp&nbsp </a> 
+                </li>
+            </ul> 
+        </nav>
+    </header>
+        <p style="font-size:400%; text-align:center; font-family:Apple Chancery;">Hotel Timis
+        </p>
+</div>
+<div class="down">
+    <header>
+    </header>
+
+    <article>
+        <p>
+<form action="{{ path('login') }}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" />
+
+    {#
+        If you want to control the URL the user
+        is redirected to on success (more details below)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+    <button type="submit">login</button>
+</form>
+        </p>
+    </article>
+
+    <footer>Copyright &copy; Stupidreason<footer>
+</div>
+</body>
+</html>
