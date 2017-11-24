@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Task;
+use AppBundle\Entity\Rooms;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,8 +34,29 @@ class DefaultController extends Controller{
 
     return new Response('Saved new booking for '.$booking->getName());
 }
+ /**
+     * @Route("/data")
+     */
+     
+    public function dataAction(Request $request)
+    {
+        $rooms = $this->getDoctrine()
+        ->getRepository(rooms::class)
+        ->findAll();
+        if (!$rooms) {
+        throw $this->createNotFoundException(
+            'No rooms found for id '.$roomsId
+            );
+        }
 
-  /**
+        return $this->render('default/data.html.twig',array('room' => $rooms));
+
+
+}
+   
+    
+
+    /**
      * @Route("/home")
      */
      
@@ -139,7 +161,7 @@ public function registerAction(UserPasswordEncoderInterface $encoder)
 {
     // whatever *your* User object is
     $user = new AppBundle\Entity\User();
-    $plainPassword = 'ryanpass';
+    $plainPassword = 'pass1234';
     $encoded = $encoder->encodePassword($user, $plainPassword);
 
     $user->setPassword($encoded);
