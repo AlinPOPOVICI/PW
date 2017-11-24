@@ -25,7 +25,7 @@ class Rooms{
     private $roomsnr;
     
      /**
-     * @ORM\Column(type="boolean", length=365, options={"fixed" = false})
+     * @ORM\Column(type="boolean",length=365,options={"fixed"=false})
      */
     private $ocupat;
     

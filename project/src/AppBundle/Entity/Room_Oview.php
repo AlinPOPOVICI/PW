@@ -52,7 +52,7 @@ class Rooms_Oview{
         return $this->roomtype;
     }
 
-    public function setRoomtypee($roomtype)
+    public function setRoomtype($roomtype)
     {
         $this->roomtype  = $roomtype;
     }
