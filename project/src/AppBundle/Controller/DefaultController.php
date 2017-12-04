@@ -16,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Entity\Booking;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class DefaultController extends Controller{
 
@@ -40,16 +42,25 @@ class DefaultController extends Controller{
      
     public function dataAction(Request $request)
     {
-        $rooms = $this->getDoctrine()
+        $rooms = new Rooms();
+        
+        $ro = $this->getDoctrine()
         ->getRepository(rooms::class)
         ->findAll();
-        if (!$rooms) {
+        if (!$ro) {
         throw $this->createNotFoundException(
-            'No rooms found for id '.$roomsId
+            'No rooms found for id '.$roId
             );
         }
-
-        return $this->render('default/data.html.twig',array('room' => $rooms));
+        $form = $this->createFormBuilder($rooms)
+            ->add('ocupat', CollectionType::class, array('entry_type'   => CheckboxType::class, 'entry_options'  => array('required' => false,),
+            'allow_add' => true,
+            'prototype' => true,))
+            ->getForm();
+       // if ($form->getClickedButton() && 'saveAndAdd' === $form->getClickedButton()->getName()) {
+      //  }
+        
+        return $this->render('default/data.html.twig',array('room' => $ro, 'form' => $form->createView()));
 
 
 }

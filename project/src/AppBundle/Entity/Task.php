@@ -10,6 +10,7 @@ class Task
     protected $date_to;
     protected $room_type;
     protected $room_nr;
+    protected $box;
 
     
     //name
@@ -65,6 +66,16 @@ class Task
     public function setRoomnr($room_nr)
     {
         $this->room_nr = $room_nr;
+    }
+    
+     public function getBox()
+    {
+        return $this->box;
+    }
+
+    public function setPublic($box)
+    {
+        $this->box  = $box;
     }
     
 }   

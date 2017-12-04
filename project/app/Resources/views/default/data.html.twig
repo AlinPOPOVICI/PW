@@ -24,15 +24,37 @@
     <header>
     </header>
     
-    <article>
-        <p>
+<table class="border" width="100%" align="center" stype="background-color :white;">
+        <thead>
+            <tr>
+                <th>RoomNR</th>
+                <th>RoomType</th>
+                <th>RoomVacancy</th>
+                <th></th>
+            </tr>  
+        </thead>
             {% for id, rooms in room %}
-            <li>{{ rooms.roomsnr }}</li>
-            {% endfor %}
-        </p>
-    </article>
+        <tbody>
+            <tr>
+                <td align="center">{{ rooms.roomsnr }} </td>
+                <td align="center">{{ rooms.roomtype }}</td>
+                 <td align="center">{{ rooms.ocupat }}
+                <label><input type="checkbox" name={{ rooms.id }} data='{{ rooms.ocupat }}'/>{{ rooms.id }}</label></td> 
+                <td align="center"></td>
+
+            </tr>   
+           {% endfor %}
+        </tbody>
+    </table>
 
     <footer>Copyright &copy; Stupidreason<footer>
 </div>
 </body>
 </html>
+
+
+
+
+
+
+ 
