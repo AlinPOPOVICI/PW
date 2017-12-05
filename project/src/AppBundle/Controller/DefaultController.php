@@ -43,6 +43,7 @@ class DefaultController extends Controller{
     public function dataAction(Request $request)
     {
         $rooms = new Rooms();
+        $task = new Task();
         
         $ro = $this->getDoctrine()
         ->getRepository(rooms::class)
@@ -57,10 +58,61 @@ class DefaultController extends Controller{
             'allow_add' => true,
             'prototype' => true,))
             ->getForm();
+            
+            
+            
+         $delete = $this->createFormBuilder($task)
+         ->add('room_type', ChoiceType::class, array(
+            'choices'  => array(
+                'Camera Simpla' => 0,
+                'Camera Dubla' => 1,
+                'Apartament' => 2,
+            ),
+            ))
+            ->add('room_nr', NumberType::class)
+            ->add('save', SubmitType::class, array('label' => 'Delete Room'))
+            ->add('saveAndAdd', SubmitType::class, array('label' => 'Save and Add'))
+            ->getForm();
+            
+            $delete->handleRequest($request);
+            if ($delete->isSubmitted() && $delete->isValid()) {
+                $task = $delete->getData();
+            if('saveAndAdd' === $delete->getClickedButton()->getName()){
+                $rooms = new Rooms();
+                $rooms->setRoomtype($task->getRoomtype());
+                $rooms->setRoomsnr($task->getRoomnr());
+                $rooms->setOcupat(false);
+   
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($rooms);
+                $em->flush();
+            }
+            if('save' === $delete->getClickedButton()->getName()){
+                $em = $this->getDoctrine()->getManager();
+                $product = $em->getRepository(Rooms::class)->findOneBy(array( 'roomsnr' => $task->getRoomnr(), 'roomtype' => $task->getRoomtype()));
+
+                if (!$product) {
+                    return $this->redirect('http://localhost:8000/data');
+
+                }
+
+                $em->remove($product);
+                $em->flush();
+                
+            }
+          return $this->redirect('http://localhost:8000/data');
+            }
+        
        // if ($form->getClickedButton() && 'saveAndAdd' === $form->getClickedButton()->getName()) {
       //  }
+        foreach($ro as $r){
+            
         
-        return $this->render('default/data.html.twig',array('room' => $ro, 'form' => $form->createView()));
+        
+        }
+        
+        return $this->render('default/data.html.twig',array('room' => $ro, 'form' => $form->createView(),'del' => $delete->createView() ));
 
 
 }
@@ -78,7 +130,7 @@ class DefaultController extends Controller{
          
    
     }
-/**
+    /**
      * @Route("/contact")
      */
      
@@ -143,8 +195,24 @@ public function verify(Booking $booking){
 
 
 }
+public function deleteRoom($nr , $type)
+{
+    $em = $this->getDoctrine()->getManager();
+    $product = $em->getRepository(Rooms::class)->findOneBy(array( 'roomsnr' => $nr, 'roomstype' => $type));
 
+    if (!$product) {
+        throw $this->createNotFoundException(
+            'No product found for id '.$id
+        );
+    }
 
+    $em->remove($product);
+    $em->flush();
+
+    return $this->redirectToRoute('product_show', [
+        'id' => $product->getId()
+    ]);
+}
 
 public function editAction()
 {
