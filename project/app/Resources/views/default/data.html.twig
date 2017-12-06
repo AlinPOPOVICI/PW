@@ -12,7 +12,7 @@
     <header> 
         <nav>
             <ul>
-                <li style="font-size:200%"> <a href="home">Home</a>&nbsp&nbsp&nbsp<a href="form">Bookings&nbsp&nbsp&nbsp</a><a href="contact">Contact &nbsp&nbsp&nbsp&nbsp </a> 
+                <li style="font-size:200%"> <a href="home">Home</a>&nbsp&nbsp&nbsp<a href="form">Bookings &nbsp&nbsp&nbsp</a><a href="contact">Contact &nbsp&nbsp&nbsp </a> <a href="data">Data &nbsp&nbsp&nbsp&nbsp </a>
                 </li>
             </ul> 
         </nav>
@@ -25,9 +25,9 @@
     </header>
         {{ form_start(del) }}{{ form_row(del) }}{{ form_end(del) }} 
         
-<table class="border" width="100%" align="center" stype="background-color :white;">
+<table class="border" width="100%" align="center" style="background-color :white; border-style: solid; border-width: 5px;">
         <thead>
-            <tr>
+            <tr style="border-style: double; border-width: 1px;">
                 <th>RoomNR</th>
                 <th>RoomType</th>
                 <th>RoomVacancy</th>
@@ -37,10 +37,16 @@
             {% for id, rooms in room %}
         <tbody>
             <tr>
-                <td align="center">{{ rooms.roomsnr }} </td>
-                <td align="center">{{ rooms.roomtype }}</td>
-                 <td align="center">{{ rooms.ocupat }}
-                <label><input type="checkbox" name={{ rooms.id }} data='{{ rooms.ocupat }}'/>{{ rooms.id }}</label></td> 
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ rooms.roomsnr }} </td>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ rooms.roomtype }}</td>
+                <td align="center" style="border-style: solid; border-width: 1px;">
+                {% if rooms.ocupat == false %}
+                    <label><input type="checkbox" name={{ rooms.id }} data='{{ rooms.ocupat }} checked='{{ rooms.ocupat }}'/>{{ rooms.id }}</label></
+                {% endif %}
+                {% if rooms.ocupat == true %}
+                   <label><input type="checkbox" name={{ rooms.id }} data='{{ rooms.ocupat }}' checked='{{ rooms.ocupat }}'/>{{ rooms.id }}</label>
+                {% endif %}
+                   </td> 
                 <td align="center"></td>
 
             </tr>   

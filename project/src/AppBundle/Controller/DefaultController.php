@@ -58,9 +58,27 @@ class DefaultController extends Controller{
             'allow_add' => true,
             'prototype' => true,))
             ->getForm();
-            
-            
-            
+        
+        
+        $form->handleRequest($request);
+        
+        if($form->isValid()) {
+            $id = $form->get('ocupat')->getData();
+            $data->get(checked)->getData();
+            //$id = $data->getName();
+            $em = $this->getDoctrine()->getManager();
+            $product = $em->getRepository(Rooms::class)->findOneBy(array( 'roomsnr' => $id));
+            if($data == "false") {
+                $product->setOcupat(false);
+            } else {
+                $product->setOcupat(true);
+            }
+            $em->flush();
+        }       
+  
+  
+  
+  // delete/add form         
          $delete = $this->createFormBuilder($task)
          ->add('room_type', ChoiceType::class, array(
             'choices'  => array(
@@ -195,10 +213,33 @@ public function verify(Booking $booking){
 
 
 }
+public function exampleAction(Request $request, $id){
+    $inputValue = $request->get("button_name");
+}
+
 public function deleteRoom($nr , $type)
 {
     $em = $this->getDoctrine()->getManager();
     $product = $em->getRepository(Rooms::class)->findOneBy(array( 'roomsnr' => $nr, 'roomstype' => $type));
+
+    if (!$product) {
+        throw $this->createNotFoundException(
+            'No product found for id '.$id
+        );
+    }
+
+    $em->remove($product);
+    $em->flush();
+
+    return $this->redirectToRoute('product_show', [
+        'id' => $product->getId()
+    ]);
+}
+
+public function modRoom($id)
+{
+    $em = $this->getDoctrine()->getManager();
+    $product = $em->getRepository(Rooms::class)->findOneBy(array( 'id' => $id));
 
     if (!$product) {
         throw $this->createNotFoundException(
