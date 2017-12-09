@@ -23,11 +23,16 @@
     <header>
     </header>
 
+    {% for id, var in info %}
     <article>
-        <p>
+        <p allign="left">
+            {{ var.txt }}
+        </p>
+        <p allign="left">
+            {{ var.suma }}
         </p>
     </article>
-
+    {% endfor %}
     <footer>Copyright &copy; Stupidreason<footer>
 </div>
 </body>

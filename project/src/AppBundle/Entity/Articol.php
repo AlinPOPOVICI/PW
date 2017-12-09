@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="articol")
  */
- 
+
 class Articol{
-    /**
+/**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,7 +28,7 @@ class Articol{
     /**
      * @ORM\Column(type="text")
      */
-    private $text;
+    private $txt;
     
     public function getName()
     {
@@ -44,12 +44,12 @@ class Articol{
     
     public function getTxt()
     {
-        return $this->text;
+        return $this->txt;
     }
 
-    public function setTxt($text)
+    public function setTxt($txt)
     {
-        $this->text  = $text;
+        $this->txt  = $txt;
     }
     
     

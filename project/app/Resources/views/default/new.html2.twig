@@ -23,13 +23,30 @@
 <div class="down">
     <header>
     </header>
-    
     <article>
         <p>
+            {{ form_start(contact) }}
+            {{ form_row(contact.feedback) }}
+            {{ form_end(contact) }} 
+        </p>
+        <p>
+            {% for id, inf in info %}
+            <p>{{ inf.nume }}</p> 
+            <p>Email:{{ inf.email }}</p>
+            <p>Telefon:{{ inf.telefon }}</p>
+            <p>Adresa:{{ inf.adresa }}</p> 
+            {% endfor %}
         </p>
     </article>
-
-    <footer>Copyright &copy; Stupidreason<footer>
+     <article>
+        <p  >
+         {{ form_start(form) }}
+         {{ form_row(form.feedback) }}
+         {{ form_end(form) }} 
+        </p>
+    </articel>
+    
 </div>
+    <footer>Copyright &copy; Stupidreason<footer>
 </body>
 </html>

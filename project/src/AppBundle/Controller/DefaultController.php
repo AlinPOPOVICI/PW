@@ -6,6 +6,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\Rooms;
+use AppBundle\Entity\Articol;
+use AppBundle\Entity\Feedback;
+use AppBundle\Entity\Contact;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Entity\Booking;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -140,11 +144,19 @@ class DefaultController extends Controller{
     /**
      * @Route("/home")
      */
-     
-    public function homeAction(Request $request)
+      public function homeAction(Request $request)
     {
+      $hom = $this->getDoctrine()
+        ->getRepository(articol::class)
+        ->findAll();
+        if (!$hom) {
+        throw $this->createNotFoundException(
+            'No rooms found for id '.$homId
+            );
+        }
+        
        
-        return $this->render('default/new2.html.twig', array());
+        return $this->render('default/new2.html.twig', array('info' => $hom,));
          
    
     }
@@ -153,9 +165,51 @@ class DefaultController extends Controller{
      */
      
     public function contactAction(Request $request)
-    {
-       
-        return $this->render('default/new.html2.twig', array());
+    {   
+        $task = new Feedback();
+        $task2 = new Feedback();
+        
+// form pt feedback
+        $form = $this->createFormBuilder($task)
+            ->add('feedback', TextareaType::class, array( 'attr' => array('style' => 'width: 400px', 'style' => 'height: 200px', )))
+            ->add('Submit', SubmitType::class, array('label' => 'Send Feedback',
+          ))
+            ->getForm();
+            
+           $form->handleRequest($request);
+            
+            if ($form->isSubmitted() && $form->isValid()) {
+                $task = $form->getData();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($task);
+                $em->flush();
+            }
+            
+// form pt contact
+        $form2 = $this->createFormBuilder($task2)
+            ->add('feedback', TextareaType::class, array( 'attr' => array('style' => 'width: 400px', 'style' => 'height: 200px', )))
+            ->add('Submit', SubmitType::class, array('label' => 'Contact us',
+          ))
+            ->getForm();
+            
+           $form2->handleRequest($request);
+            
+            if ($form2->isSubmitted() && $form2->isValid()) {
+                $task = $form2->getData();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($task2);
+                $em->flush();
+            }
+// date de contact            
+        $hom = $this->getDoctrine()
+        ->getRepository(contact::class)
+        ->findAll();
+        if (!$hom) {
+        throw $this->createNotFoundException(
+            'No rooms found for id '.$homId
+            );
+        }
+        return $this->render('default/new.html2.twig', array('info' => $hom, 'form' => $form->createView(),'contact' => $form2->createView()));
          
    
     }
