@@ -247,6 +247,9 @@ class DefaultController extends Controller{
                 $booking->setName($task->getName());
                 $booking->setRoomtype($task->getRoomtype());
                 $booking->setRoomnr($task->getRoomnr());
+                $booking->setData($task->getDateFrom());
+                $booking->setDatato($task->getDateTo());
+
                 $booking->setSuma($task->getRoomnr()*$task->getRoomnr()*30);
    
 

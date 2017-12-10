@@ -33,7 +33,18 @@ class Booking{
      * @ORM\Column(type="integer")
      */
     private $roomsnr;
-    
+      /**
+ * @var date $data
+ *
+ * @ORM\Column(name="data", type="date", nullable=true)
+ */
+    private $data;
+      /**
+ * @var date $data
+ *
+ * @ORM\Column(name="datato", type="date", nullable=true)
+ */
+    private $datato;
     
     public function getName()
     {
@@ -82,6 +93,29 @@ class Booking{
     }
     
     
+    
+      public function getData()
+    {
+        return $this->data;
+    }
+
+    public function setData($data)
+    {
+        $this->data  = $data;
+    }
+    
+    
+    
+    
+      public function getDatato()
+    {
+        return $this->datato;
+    }
+
+    public function setDatato($datato)
+    {
+        $this->datato  = $datato;
+    }
     
 
 }

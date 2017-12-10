@@ -13,25 +13,41 @@ class Fixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         // create 20 products! Bam!
+        $VAR=mt_rand(20, 30);
+        $j = date('Y-m-d', strtotime('2017/12/01'));
+        echo $j;
+        $fin = date('Y-m-d', strtotime('2019/01/01'));
+        echo $fin;
+        while($j != $fin){
+            for ($i = 0; $i < 3; $i++) {
+                $rooms = new Rooms_Oview();
+                $rooms->setRoomtype($i);
+                $rooms->setData(\DateTime::createFromFormat('Y-m-d', $j));
+                $rooms->setRoomsnr($VAR);
+                $rooms->setNr(mt_rand(1, 20));
+                $manager->persist($rooms);
+            }
+            echo "$j\n";
+            $j = date("Y-m-d", strtotime("+1 day", strtotime($j)));
+        }
+        echo "\nfinish over_view\n";
+        
         for ($i = 0; $i < 3; $i++) {
-            $rooms = new Rooms_Oview();
-            $rooms->setRoomtype($i);
-            $VAR=mt_rand(20, 30);
-            $rooms->setRoomsnr($VAR);
-            $rooms->setNr(mt_rand(1, 20));
-            $manager->persist($rooms);
-            for ($j = 1; $j <= $VAR; $j++) {
-            
+            for ($j = $i*$VAR; $j < $VAR*($i+1); $j++) {
                 $rooms_o = new Rooms();
                 $rooms_o->setRoomtype($i);
                 $rooms_o->setRoomsnr($j);
-                   //for ($j = 0; $j < 365; $j++) {
-                       $rooms_o->setoCUPAT(mt_rand(0,1));
-                   // }
+                $rooms_o->setoCUPAT(mt_rand(0,1));
                 $manager->persist($rooms_o);
                 
             }
+            
         }
+        echo "finish rooms\n";
+
+        
+        
+
         
         $articol = new Articol();
         $articol->setName("Version 1");
@@ -68,7 +84,10 @@ class Fixtures extends Fixture
 
 
         
+        echo "Finis\n";
 
         $manager->flush();
+        echo "finish\n";
+
     }
 }

@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="rooms_oview")
@@ -27,6 +28,12 @@ class Rooms_Oview{
      * @ORM\Column(type="integer")
      */
     private $roomsnr;  # camere ocupate de tipul respectiv 
+     /**
+ * @var date $data
+ *
+ * @ORM\Column(name="data", type="date", nullable=true)
+ */
+    private $data;
     
     
          public function getID()
@@ -78,6 +85,19 @@ class Rooms_Oview{
     public function setRoomsnr($roomsnr)
     {
         $this->roomsnr  = $roomsnr;
+    }
+    
+    
+    
+     
+      public function getData()
+    {
+        return $this->data;
+    }
+
+    public function setData($data)
+    {
+        $this->data  = $data;
     }
 
 }

@@ -25,7 +25,7 @@ class Rooms{
     private $roomsnr;
     
      /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $ocupat;
     
@@ -71,5 +71,7 @@ class Rooms{
     {
         $this->ocupat  = $ocupat;
     }
+    
+    
 
 }

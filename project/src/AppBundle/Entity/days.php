@@ -1,28 +1,43 @@
 <?php
-/*namespace AppBundle\Entity;
+/*namespace My\Project\Types;
+
+use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
+
+/**
+ * My custom datatype.
+ /
+class Days extends Type{
+
+private  $format ='Y/m/d'
+
+private  $dat = array();
+
+private  $ocupat;
 
 
-class Days{
 
-
-private boolean $year[365];
-
-
-
-
- public function getDay($nr)
+    public function getDat()
     {
-        return $this->$year[$nr];
+        return $this->$dat;
     }
 
-    public function setTrue($nr)
-    {
-        $this->$year[$nr]  = true;
+    public function setDat($day)
+    {   
+        $current = strtotime($day);
+        $this->$dat[] = date($format, $current);
     }
-    public function setFalse($nr)
+    
+     public function getOcupat()
     {
-        $this->$year[$nr]  = false;
+        return $this->ocupat;
+    }
+
+    public function setOcupat($ocupat)
+    {
+        $this->ocupat  = $ocupat;
     }
 
 }
+
 */
