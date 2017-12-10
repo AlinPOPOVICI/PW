@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\Rooms;
+use AppBundle\Entity\Rooms_Oview;
 use AppBundle\Entity\Articol;
 use AppBundle\Entity\Feedback;
 use AppBundle\Entity\Contact;
@@ -222,7 +223,16 @@ class DefaultController extends Controller{
         // create a task and give it some dummy data for this example
         $task = new Task();
         //$task->setTask('Rezervare');
-
+        $ro = $this->getDoctrine()
+        ->getRepository(Rooms_Oview::class)
+        ->findAll();
+        if (!$ro) {
+        throw $this->createNotFoundException(
+            'No rooms found for id '.$roId
+            );
+        }
+        
+        
         $form = $this->createFormBuilder($task)
             ->add('name', TextType::class)
             ->add('date_from', DateType::class)
@@ -239,26 +249,55 @@ class DefaultController extends Controller{
             ->getForm();
             
             $form->handleRequest($request);
-            
+            $c = 0;
             if ($form->isSubmitted() && $form->isValid()) {
+                $counter = 0;
+                $c=1;
                 $task = $form->getData();
-               
-                $booking = new Booking();
-                $booking->setName($task->getName());
-                $booking->setRoomtype($task->getRoomtype());
-                $booking->setRoomnr($task->getRoomnr());
-                $booking->setData($task->getDateFrom());
-                $booking->setDatato($task->getDateTo());
-
-                $booking->setSuma($task->getRoomnr()*$task->getRoomnr()*30);
-   
-
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($booking);
-                $em->flush();
+    
+                $datefrom = clone $task->getDateFrom();
+                $dateto = $task->getDateTo();
+                while($datefrom != $dateto){
+                    $product = $em->getRepository(Rooms_oview::class)->findOneBy(array( 'data' => $datefrom));
+                    if($product->getRoomsnr() == $product->getNr()){
+                        $counter = $counter + 1;
+                    }
+
+                    $datefrom->modify('+1 day');
+                }
+                
+                if($counter != 0){
+                
+                    return $this->redirect('http://localhost:8000/form');
+               
+               }else{
+                
+                $datefrom = clone $task->getDateFrom();
+                while($datefrom != $dateto){
+                    $product = $em->getRepository(Rooms_Oview::class)->findOneBy(array( 'data' => $datefrom));
+                        $product->setNr($product->getNr() + 1);
+                        $em->persist($product);
+                         $datefrom->modify('+1 day');
+                }
+                
+                    
+                    $booking = new Booking();
+                    $booking->setName($task->getName());
+                    $booking->setRoomtype($task->getRoomtype());
+                    $booking->setRoomnr($task->getRoomnr());
+                    $booking->setData($task->getDateFrom());
+                    $booking->setDatato($task->getDateTo());
+                    $booking->setSuma($task->getRoomnr()*$task->getRoomnr()*30);
+
+
+                    $em->persist($booking);
+                    $em->flush();
+                    return $this->redirect('http://localhost:8000/form');
+                }
             }
         return $this->render('default/new.html.twig', array(
-            'form' => $form->createView(),
+            'form' => $form->createView(),'c' => $c,
         ));
     }
     

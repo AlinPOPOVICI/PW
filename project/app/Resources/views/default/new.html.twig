@@ -29,6 +29,16 @@
         {{ form_widget(form) }}
         {{ form_end(form) }} 
         </p>
+         {% for id, cc in c %}
+        {% if c != 0 %}
+        <p> NU SUNT CAMERE DISPONIBILE IN {{ cc }} DIN ZILELE DORITE 
+        </p>
+        {% endif %}
+        {% if c == 0 %}
+        <p> REZERVAREA A FOST FACUTA  
+        </p>
+        {% endif %}
+          {% endfor %}
     </article>
 
     <footer>Copyright &copy; Stupidreason<footer>
