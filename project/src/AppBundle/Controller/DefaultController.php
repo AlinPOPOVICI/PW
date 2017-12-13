@@ -251,6 +251,13 @@ class DefaultController extends Controller{
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
+                if($task->getDateFrom() >= $task->getDateTo()){
+                    $this->addFlash(
+                    'notice',
+                    'Invalid date'
+                    );
+                }else{
+                
                 $counter = 0;
                 $task = $form->getData();
                 $em = $this->getDoctrine()->getManager();
@@ -299,6 +306,7 @@ class DefaultController extends Controller{
                     $em->persist($booking);
                     $em->flush();
                     return $this->redirect('http://localhost:8000/form');
+                }
                 }
             }
         return $this->render('default/new.html.twig', array(

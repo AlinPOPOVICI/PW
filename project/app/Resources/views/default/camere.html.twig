@@ -12,7 +12,7 @@
     <header> 
         <nav>
             <ul>
-                          <li style="font-size:200%"> <a href="home">Home</a>&nbsp<a href="form">Bookings &nbsp</a><a href="contact">Contact &nbsp </a> <a href="data">Data &nbsp</a> <a href="oview">Oview</a> &nbsp <a href="rezerv">Booking_Data &nbsp&nbsp </a>
+                  <li style="font-size:200%"> <a href="home">Home</a>&nbsp<a href="form">Bookings &nbsp</a><a href="contact">Contact &nbsp </a> <a href="data">Data &nbsp</a> <a href="oview">Oview</a> &nbsp <a href="rezerv">Booking_Data &nbsp&nbsp </a>
                 </li>
             </ul> 
         </nav>
@@ -24,16 +24,15 @@
     <header>
     </header>
         {{ form_start(form) }}{{ form_row(form) }}{{ form_end(form) }} 
-        {{ form_start(del) }}{{ form_row(del) }}{{ form_end(del) }} 
+
         
 <table class="border" width="100%" align="center" style="background-color :white; border-style: solid; border-width: 5px;">
         <thead>
             <tr style="border-style: double; border-width: 1px;">
-                <th>Name</th>
                 <th>RoomType</th>
                 <th>RoomNumber</th>
-                <th>From</th>
-                <th>To</th>
+                <th>Number Ocupied</th>
+                <th>Date</th>
                 <th></th>
             </tr>  
         </thead>
@@ -41,11 +40,10 @@
             {% for id, books in book %}
         <tbody>
             <tr>
-                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.name }} </td>
                 <td align="center" style="border-style: solid; border-width: 1px;">{{ books.roomtype }}</td>
                 <td align="center" style="border-style: solid; border-width: 1px;">{{ books.roomsnr }}</td>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.nr }} </td>
                 <td align="center" style="border-style: solid; border-width: 1px;">{{ books.data|date('Y-m-d') }}</td>
-                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.datato|date('Y-m-d') }}</td>
 
             </tr>   
            {% endfor %}
@@ -54,11 +52,10 @@
            {% for id, books in stack %}
         <tbody>
             <tr>
-                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.name }} </td>
                 <td align="center" style="border-style: solid; border-width: 1px;">{{ books.roomtype }}</td>
                 <td align="center" style="border-style: solid; border-width: 1px;">{{ books.roomsnr }}</td>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.nr }} </td>
                 <td align="center" style="border-style: solid; border-width: 1px;">{{ books.data|date('Y-m-d') }}</td>
-                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.datato|date('Y-m-d') }}</td>
 
             </tr>   
            {% endfor %}
