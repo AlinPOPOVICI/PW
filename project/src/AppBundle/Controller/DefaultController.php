@@ -157,7 +157,7 @@ class DefaultController extends Controller{
         }
         
        
-        return $this->render('default/new2.html.twig', array('info' => $hom,));
+        return $this->render('default/home.html.twig', array('info' => $hom,));
          
    
     }
@@ -210,7 +210,7 @@ class DefaultController extends Controller{
             'No rooms found for id '.$homId
             );
         }
-        return $this->render('default/new.html2.twig', array('info' => $hom, 'form' => $form->createView(),'contact' => $form2->createView()));
+        return $this->render('default/contact.html.twig', array('info' => $hom, 'form' => $form->createView(),'contact' => $form2->createView()));
          
    
     }
@@ -232,7 +232,7 @@ class DefaultController extends Controller{
             );
         }
         
-        
+
         $form = $this->createFormBuilder($task)
             ->add('name', TextType::class)
             ->add('date_from', DateType::class)
@@ -249,10 +249,9 @@ class DefaultController extends Controller{
             ->getForm();
             
             $form->handleRequest($request);
-            $c = 0;
+            
             if ($form->isSubmitted() && $form->isValid()) {
                 $counter = 0;
-                $c=1;
                 $task = $form->getData();
                 $em = $this->getDoctrine()->getManager();
     
@@ -260,7 +259,7 @@ class DefaultController extends Controller{
                 $dateto = $task->getDateTo();
                 while($datefrom != $dateto){
                     $product = $em->getRepository(Rooms_oview::class)->findOneBy(array( 'data' => $datefrom));
-                    if($product->getRoomsnr() == $product->getNr()){
+                    if($product->getRoomsnr() < $product->getNr() + $task->getRoomnr()){
                         $counter = $counter + 1;
                     }
 
@@ -268,15 +267,18 @@ class DefaultController extends Controller{
                 }
                 
                 if($counter != 0){
-                
-                    return $this->redirect('http://localhost:8000/form');
+                    $this->addFlash(
+                    'notice',
+                    'Rooms are not awaylable'
+                    );
+                    //return $this->redirect('http://localhost:8000/form');
                
                }else{
-                
+       
                 $datefrom = clone $task->getDateFrom();
                 while($datefrom != $dateto){
                     $product = $em->getRepository(Rooms_Oview::class)->findOneBy(array( 'data' => $datefrom));
-                        $product->setNr($product->getNr() + 1);
+                        $product->setNr($product->getNr() + $task->getRoomnr());
                         $em->persist($product);
                          $datefrom->modify('+1 day');
                 }
@@ -289,7 +291,10 @@ class DefaultController extends Controller{
                     $booking->setData($task->getDateFrom());
                     $booking->setDatato($task->getDateTo());
                     $booking->setSuma($task->getRoomnr()*$task->getRoomnr()*30);
-
+                     $this->addFlash(
+                    'notice',
+                    'Your changes were saved!'
+                    );
 
                     $em->persist($booking);
                     $em->flush();
@@ -297,7 +302,7 @@ class DefaultController extends Controller{
                 }
             }
         return $this->render('default/new.html.twig', array(
-            'form' => $form->createView(),'c' => $c,
+            'form' => $form->createView(),
         ));
     }
     

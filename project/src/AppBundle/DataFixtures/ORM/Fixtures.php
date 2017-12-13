@@ -51,6 +51,7 @@ class Fixtures extends Fixture
         
         $articol = new Articol();
         $articol->setName("Version 1");
+        $articol->setPhoto("room1.jpg");
         $articol->setSuma(mt_rand(180, 400));
         $articol->setTxt("Hotel Timiş este cel mai mare din oraş, cu 191 de camere şi 18 apartamente. Oaspeţii au avantajul poziţiei privilegiate, în chiar centrul oraşului.\n
                           Spaţiile publice ale hotelului adăpostesc o importantă colecţie de artă românească contemporană. Reamenajat şi renovat recent, Hotel Timişoara se \n
@@ -60,6 +61,7 @@ class Fixtures extends Fixture
         
         $articol = new Articol();
         $articol->setName("Version 2");
+        $articol->setPhoto("room2.jpg");
         $articol->setSuma(mt_rand(180, 400));
         $articol->setTxt("Bucura-te de confort intr-o locatie moderna!\n
                           Hotel CheckInn Timisoara este situat intr-o \n

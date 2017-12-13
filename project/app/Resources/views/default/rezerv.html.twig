@@ -1,0 +1,64 @@
+ 
+<link rel="stylesheet" href="{{ asset('bundles/mystyle_data.css') }}" />
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+<body >
+
+<div class="top" background="lugoj.jpg">
+    <header> 
+        <nav>
+            <ul>
+                  <li style="font-size:200%"> <a href="home">Home</a>&nbsp&nbsp<a href="form">Bookings &nbsp&nbsp</a><a href="contact">Contact &nbsp&nbsp </a> <a href="data">Data &nbsp&nbsp </a><a href="rezerv">Booking_Data &nbsp&nbsp&nbsp </a>
+                </li>
+            </ul> 
+        </nav>
+    </header>
+        <p style="font-size:400%; text-align:center; font-family:Apple Chancery;">Hotel Timis
+        </p>
+</div>
+<div class="down">
+    <header>
+    </header>
+        {{ form_start(form) }}{{ form_row(form) }}{{ form_end(form) }} 
+        {{ form_start(del) }}{{ form_row(del) }}{{ form_end(del) }} 
+        
+<table class="border" width="100%" align="center" style="background-color :white; border-style: solid; border-width: 5px;">
+        <thead>
+            <tr style="border-style: double; border-width: 1px;">
+                <th>Name</th>
+                <th>RoomType</th>
+                <th>RoomNumber</th>
+                <th>From</th>
+                <th>To</th>
+                <th></th>
+            </tr>  
+        </thead>
+            {% for id, books in book %}
+        <tbody>
+            <tr>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.name }} </td>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.roomtype }}</td>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.roomsnr }}</td>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.data|date('Y-m-d') }}</td>
+                <td align="center" style="border-style: solid; border-width: 1px;">{{ books.datato|date('Y-m-d') }}</td>
+
+            </tr>   
+           {% endfor %}
+        </tbody>
+    </table>
+
+    <footer>Copyright &copy; Stupidreason<footer>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+ 

@@ -20,7 +20,11 @@ class Articol{
 
      */
     private $name;
-    
+        /**
+     * @ORM\Column(type="string", length=100)
+
+     */
+    private $photo;
     /**
      * @ORM\Column(type="integer")
      */
@@ -39,6 +43,18 @@ class Articol{
     {
         $this->name  = $name;
     }
+    
+    
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo)
+    {
+        $this->photo  = $photo;
+    }
+    
     
     
     

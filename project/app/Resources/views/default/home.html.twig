@@ -1,13 +1,13 @@
-<link rel="stylesheet" href="{{ asset('bundles/mystyle.css') }}" />
+<link rel="stylesheet" href="{{ asset('bundles/mystyle_home.css') }}" />
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 
-<body style="background-color:rgb(0, 255, 255);">
+<body >
 
-<div class="top" background="lugoj.jpg">
+<div class="top">
     <header> 
         <nav>
             <ul>
@@ -22,15 +22,19 @@
 <div class="down">
     <header>
     </header>
-
     {% for id, var in info %}
     <article>
-        <p allign="left">
+         <img style="background-image:url('bundles/{{ var.photo }}')">
+         </img>
+        <suma>
+        
+                PRET:{{ var.suma }}
+        </suma>
+        
+        </p>
+        <text>
             {{ var.txt }}
-        </p>
-        <p allign="left">
-            {{ var.suma }}
-        </p>
+        </text>
     </article>
     {% endfor %}
     <footer>Copyright &copy; Stupidreason<footer>

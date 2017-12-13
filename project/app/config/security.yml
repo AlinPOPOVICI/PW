@@ -10,7 +10,7 @@ security:
     providers:
         our_db_provider:
             entity:
-                class: AppBundle:User
+                class: AppBundle/Entity/App_user
                 property: username
       #  in_memory:
        #     memory: 
@@ -28,9 +28,9 @@ security:
             security: false
 
         main:
-          # pattern:    ^/
-           # http_basic: ~
-           # provider: our_db_provider
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            http_basic: ~
+            provider: our_db_provider
             anonymous: ~
             # activate different ways to authenticate
 
@@ -43,7 +43,9 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: home
+                failure_path: home
+                target_path_parameter: data
+
                 
     access_control:
 
@@ -51,8 +53,7 @@ security:
     - { path: ^/form, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/data, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/, roles: ROLE_ADMIN }  #ROLE_ADMIN
+    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }  #ROLE_ADMIN
 
     
 

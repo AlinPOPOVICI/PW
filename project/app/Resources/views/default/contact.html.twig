@@ -1,5 +1,5 @@
  
-<link rel="stylesheet" href="{{ asset('bundles/mystyle.css') }}" />
+<link rel="stylesheet" href="{{ asset('bundles/mystyle_contact.css') }}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,26 +24,26 @@
     <header>
     </header>
     <article>
-        <p>
-            {{ form_start(contact) }}
+        <contact>
+            {% for id, inf in info %}
+            <p style="padding-top:100px; padding-right: 30px; padding-bottom: 10px; padding-left: 70px;">{{ inf.nume }}</p> 
+            <p style="padding-top:0px; padding-right: 30px; padding-bottom: 10px; padding-left: 50px;">Email:{{ inf.email }}</p>
+            <p style="padding-top:0px; padding-right: 30px; padding-bottom: 10px; padding-left: 50px;">Telefon:{{ inf.telefon }}</p>
+            <p style="padding-top:0px; padding-right: 30px; padding-bottom: 10px; padding-left: 50px;">Adresa:{{ inf.adresa }}</p> 
+            {% endfor %}
+        </contact>
+        <feedback>
+               {{ form_start(contact) }}
             {{ form_row(contact.feedback) }}
             {{ form_end(contact) }} 
-        </p>
-        <p>
-            {% for id, inf in info %}
-            <p>{{ inf.nume }}</p> 
-            <p>Email:{{ inf.email }}</p>
-            <p>Telefon:{{ inf.telefon }}</p>
-            <p>Adresa:{{ inf.adresa }}</p> 
-            {% endfor %}
-        </p>
+         </feedback>
     </article>
      <article>
-        <p  >
+        <feedback2>
          {{ form_start(form) }}
          {{ form_row(form.feedback) }}
          {{ form_end(form) }} 
-        </p>
+        </feedback2>
     </articel>
     
 </div>
